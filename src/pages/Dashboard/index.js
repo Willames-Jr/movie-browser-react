@@ -18,7 +18,7 @@ export default class DashBoard extends Component{
         .then(res => {
             this.setState({
                 user: res.data,
-            })
+            });
         }).catch(err => {
             console.log(err);
         });
