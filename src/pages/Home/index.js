@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Table, Container, Card, CardImg, CardBody, CardText, Col, Row } from 'reactstrap';
 import loading from '../../assets/loading.gif';
+import noImage from '../../assets/no-image.jpg';
 import NavBar from '../../components/NavBar';
 import './styles.css';
 
@@ -23,7 +24,7 @@ export default class Home extends Component {
         this.getFilms();
         const intersecterObserver = new IntersectionObserver((entires) => {
             const ratio = entires[0].intersectionRatio;
-
+            console.log(ratio);
             if (ratio > 0) {
                 this.setState({
                     page: this.state.page + 1,
@@ -64,46 +65,34 @@ export default class Home extends Component {
         return (
             <div>
                 <NavBar />
-                <Container>
-                    <h2>Listagem de filmes:</h2>
+                <Container className="mt-4">
+                    <h2 className="mt-4" style={{ color: "white" }}>Filmes populares:</h2>
                     <hr />
-                    <Row xs="1" sm = "2" lg = "4" xl = "5" className = "mt-3" >
+                    <Row xs="2" lg="4" xl="5" className="mt-3" >
                         {
                             this.state.result.map(movie => {
                                 return (
-                                    <Col key = {movie.title} className = "mt-3">
+                                    <Col key={movie.title} className="mt-3">
                                         <Card className="movie-image" width={400} height={400}>
-                                            <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="imagem do filme" />
+                                            {   
+                                                movie.poster_path === null 
+                                                ?<CardImg height = {294} top src={noImage} alt="imagem do filme nulo" /> 
+                                                :<CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="imagem do filme" />
+                                            }
                                         </Card>
                                     </Col>
                                 );
                             })
                         }
+                        <div className="mt-4" ref={this.divInfiniteScrollRef}><h1></h1></div>
                     </Row>
-                    {this.state.showLoading && <img alt="Carregando" src={loading} width={200} height={200} />}
-                    <div height = {300} ref={this.divInfiniteScrollRef}></div>
+                    {this.state.showLoading &&
+                        <Container style = {{display: "flex" , alignItems: "center", justifyContent: "center"}}>
+                            <img style={{ display: "flex", alignSelf: "center" }} height="50" width="50" alt="Carregando" src={loading} />
+                        </Container>
+                    }
                 </Container>
             </div>
         )
     }
 }
-/*
-<Table>
-                        <thead>
-                            <th>Imagem</th>
-                            <th>Title</th>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.result.map(movie => {
-                                    return (
-                                        <tr>
-                                            <td><img className = "movie-image" alt="imagem do filme" src={'http://image.tmdb.org/t/p/w185/' + movie.poster_path} /></td>
-                                            <td>{movie.title}</td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
-*/
