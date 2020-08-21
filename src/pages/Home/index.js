@@ -230,7 +230,6 @@ export default class Home extends Component {
                             </Button>
                         </InputGroupAddon>
                     </InputGroup>
-                    <h3 style={{ color: "white" }}>{this.state.movieSearch}</h3>
                     <ButtonGroup className="mt-3">
                         <Button color={this.state.buttonClicked === 'popularity' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('popularity') }}>Popularidade</Button>
                         <Button color={this.state.buttonClicked === 'date' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('date') }}>Em breve</Button>
