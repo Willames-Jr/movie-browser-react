@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button, Alert, Card, CardBody } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Alert, Card, CardBody, Container } from 'reactstrap';
 import Header from '../../components/Header';
 import usersApi from '../../services/usersApi';
 import NavBar from '../../components/NavBar';
@@ -71,7 +71,7 @@ export default class Login extends Component {
         return (
             <div>
                 <NavBar />
-                <div className="container mt-4" id = "container">
+                <Container id = "container">
                     <Card id = "card">
                         <CardBody>
                             <Form>
@@ -94,7 +94,7 @@ export default class Login extends Component {
                             </Form>
                         </CardBody>
                     </Card>
-                </div>
+                </Container>
 
             </div>
         );

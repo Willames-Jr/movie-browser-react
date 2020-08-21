@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Card, CardImg, Col, Row, ButtonGroup, Button } from 'reactstrap';
+import { Container, Card, CardImg, Col, Row, ButtonGroup, Button, InputGroup, Input, InputGroupAddon } from 'reactstrap';
 import loading from '../../assets/loading.gif';
 import noImage from '../../assets/no-image.jpg';
 import NavBar from '../../components/NavBar';
@@ -14,6 +14,8 @@ export default class Home extends Component {
         super();
         this.divInfiniteScrollRef = React.createRef();
         this.state = {
+            movieSearch: '',
+            title: 'Filmes Populares:',
             result: [],
             page: 1,
             buttonClicked: 'popularity',
@@ -25,20 +27,23 @@ export default class Home extends Component {
         this.getMoviesByPopularity();
         const intersecterObserver = new IntersectionObserver((entires) => {
             const ratio = entires[0].intersectionRatio;
-            console.log(ratio);
+            console.log(this.state.totalPages);
             if (ratio > 0) {
                 this.setState({
                     page: this.state.page + 1,
                     showLoading: true
                 }, () => {
-                    if(this.state.buttonClicked === 'popularity'){
+                    if (this.state.buttonClicked === 'popularity') {
                         this.getMoviesByPopularity();
                     }
-                    if(this.state.buttonClicked === 'date'){
+                    if (this.state.buttonClicked === 'date') {
                         this.getMoviesByDate();
                     }
-                    if(this.state.buttonClicked === 'vote'){
+                    if (this.state.buttonClicked === 'vote') {
                         this.getMoviesByVote();
+                    }
+                    if (this.state.buttonClicked === 'none') {
+                        this.getMoviesByName(this.state.movieSearch);
                     }
                 })
             }
@@ -48,23 +53,66 @@ export default class Home extends Component {
     }
 
     buttonClick = (buttonClicked) => {
-        if(buttonClicked !== this.state.buttonClicked){
+        if (buttonClicked !== this.state.buttonClicked) {
             this.setState({
                 result: [],
                 buttonClicked: buttonClicked,
                 page: 1
             }, () => {
-                if(buttonClicked === 'popularity'){
+                this.changeTitle();
+                if (buttonClicked === 'popularity') {
                     this.getMoviesByPopularity();
                 }
-                if(buttonClicked === 'date'){
+                if (buttonClicked === 'date') {
                     this.getMoviesByDate();
                 }
-                if(buttonClicked === 'vote'){
+                if (buttonClicked === 'vote') {
                     this.getMoviesByVote();
                 }
             })
         }
+    }
+
+    onSearchUpdate = (movieName) => {
+        this.setState({
+            movieSearch: movieName,
+            title: `Resultados de "${movieName}":`,
+            result: [],
+            page: 1,
+            buttonClicked: 'none'
+        }, () => {
+            if (movieName !== '') {
+
+                this.getMoviesByName(movieName);
+
+            } else {
+                this.changeTitle();
+                this.buttonClick(this.state.buttonClicked);
+            }
+        });
+
+    }
+
+    getMoviesByName = (movieName) => {
+        movieApi.get(`search/movie?api_key=edfb0ea0d4a2c7c78cb457a8cf9d01cf&language=en-US&query=${movieName}&page=${this.state.page}&include_adult=false`)
+            .then((response) => {
+                if (this.state.page !== 1) {
+                    var oldResult = this.state.result;
+                    oldResult.push(...response.data.results)
+                    this.setState({
+                        result: oldResult,
+                        showLoading: false
+                    });
+                } else {
+                    this.setState({
+                        result: response.data.results,
+                        showLoading: false
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     getMoviesByVote = () => {
@@ -139,7 +187,7 @@ export default class Home extends Component {
     showMovies = () => {
         return this.state.result.map(movie => {
             return (
-                <Col key={movie.title} className="mt-3">
+                <Col key={movie.id} className="mt-3">
                     <Card className="movie-image" width={400} height={400}>
                         {
                             movie.poster_path === null
@@ -152,21 +200,48 @@ export default class Home extends Component {
         });
     }
 
+    changeTitle = () => {
+        var titleMessage;
+
+        if (this.state.buttonClicked === 'popularity') {
+            titleMessage = 'Filmes populares:';
+        }
+        if (this.state.buttonClicked === 'vote') {
+            titleMessage = 'Filmes bem avaliados:';
+        }
+        if (this.state.buttonClicked === 'date') {
+            titleMessage = 'Proximos lançamentos:';
+        }
+        return this.setState({
+            title: titleMessage
+        });
+    }
+
     render() {
         return (
             <div>
                 <NavBar />
-                <Container className="mt-4">
-                    <ButtonGroup>
-                        <Button color = {this.state.buttonClicked === 'popularity' ? 'success' : 'secondary'} onClick = {(e) => {this.buttonClick('popularity')}}>Popularidade</Button>
-                        <Button color = {this.state.buttonClicked === 'date' ? 'success' : 'secondary'} onClick = {(e) => {this.buttonClick('date')}}>Em breve</Button>
-                        <Button color = {this.state.buttonClicked === 'vote' ? 'success' : 'secondary'} onClick = {(e) => {this.buttonClick('vote')}}>Melhores avaliações</Button>
+                <Container className="principal-container">
+                    <InputGroup>
+                        <Input placeholder="Pesquisar filme" onChange={(e) => this.onSearchUpdate(e.target.value)} />
+                        <InputGroupAddon addonType="prepend">
+                            <Button color="primary">
+                                <i className="fa fa-search"></i>
+                            </Button>
+                        </InputGroupAddon>
+                    </InputGroup>
+                    <h3 style={{ color: "white" }}>{this.state.movieSearch}</h3>
+                    <ButtonGroup className="mt-3">
+                        <Button color={this.state.buttonClicked === 'popularity' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('popularity') }}>Popularidade</Button>
+                        <Button color={this.state.buttonClicked === 'date' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('date') }}>Em breve</Button>
+                        <Button color={this.state.buttonClicked === 'vote' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('vote') }}>Melhores avaliações</Button>
                     </ButtonGroup>
-                    <h2 className="mt-4" style={{ color: "white" }}>Filmes populares:</h2>
-                    <hr />
-                    <Row xs="2" lg="4" xl="5" className="mt-3" >
+                    <h2 className="mt-4" style={{ color: "white" }}>{this.state.title}</h2>
+
+                    <Row xs="2" md="3" lg="4" xl="5" className="mt-3" >
                         {
                             this.showMovies()
+                            
                         }
                         <div className="mt-4" ref={this.divInfiniteScrollRef}><p></p></div>
                     </Row>
@@ -176,6 +251,7 @@ export default class Home extends Component {
                         </Container>
                     }
                 </Container>
+
             </div>
         )
     }
