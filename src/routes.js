@@ -5,6 +5,7 @@ import DashBoard from './pages/Dashboard';
 import Home from './pages/Home';
 import PrivateRoute from './auth';
 import Logout from './pages/Logout';
+import MovieDatails from './pages/MovieDetails';
 
 const Routes = () => (
     <Router>
@@ -13,6 +14,7 @@ const Routes = () => (
             <PrivateRoute path="/admin" component={DashBoard}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>
+            <Route path="/moviedetails/:id" component = {MovieDatails}/>
         </Switch>
     </Router>
 )

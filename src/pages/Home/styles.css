@@ -5,8 +5,3 @@
 .movie-image:hover{
     transform: scale(1.1);
 }
-
-.principal-container{
-    position: relative;
-    top: 5.2rem;
-}

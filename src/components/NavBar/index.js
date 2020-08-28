@@ -24,7 +24,7 @@ const NavBar = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem hidden="false">
+            <NavItem>
               <NavLink href="#">Pesquisar</NavLink>
             </NavItem>
           </Nav>

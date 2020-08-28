@@ -5,6 +5,7 @@ import noImage from '../../assets/no-image.jpg';
 import NavBar from '../../components/NavBar';
 import './styles.css';
 import movieApi from '../../services/movieApi';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
 
@@ -187,15 +188,17 @@ export default class Home extends Component {
     showMovies = () => {
         return this.state.result.map(movie => {
             return (
-                <Col key={movie.id} className="mt-3">
-                    <Card className="movie-image" width={400} height={400}>
-                        {
-                            movie.poster_path === null
-                                ? <CardImg height={294} top src={noImage} alt="imagem do filme nulo" />
-                                : <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="imagem do filme" />
-                        }
-                    </Card>
-                </Col>
+                <Link to= {`/moviedetails/${movie.id}`} >
+                    <Col key={movie.id} className="mt-3">
+                        <Card className="movie-image" width={400} height={400}>
+                            {
+                                movie.poster_path === null
+                                    ? <CardImg height={294} top src={noImage} alt="imagem do filme nulo" />
+                                    : <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="imagem do filme" />
+                            }
+                        </Card>
+                    </Col>
+                </Link>
             );
         });
     }
@@ -235,12 +238,10 @@ export default class Home extends Component {
                         <Button color={this.state.buttonClicked === 'date' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('date') }}>Em breve</Button>
                         <Button color={this.state.buttonClicked === 'vote' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('vote') }}>Melhores avaliações</Button>
                     </ButtonGroup>
-                    <h2 className="mt-4" style={{ color: "white" }}>{this.state.title}</h2>
-
+                    <h2 className="mt-4" >{this.state.title}</h2>
                     <Row xs="2" md="3" lg="4" xl="5" className="mt-3" >
                         {
                             this.showMovies()
-                            
                         }
                         <div className="mt-4" ref={this.divInfiniteScrollRef}><p></p></div>
                     </Row>
@@ -250,8 +251,7 @@ export default class Home extends Component {
                         </Container>
                     }
                 </Container>
-
             </div>
-        )
+        );
     }
 }
