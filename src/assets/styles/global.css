@@ -7,3 +7,9 @@ body{
     position: relative;
     top: 5.2rem;
 }
+
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
