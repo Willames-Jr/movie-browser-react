@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
 import NavBar from '../../components/NavBar';
-import { Container, CardTitle, CardText, Card, CardBody, CardSubtitle, CardHeader} from 'reactstrap';
+import { Container,CardText, Card, CardBody, CardSubtitle, CardHeader, CardFooter, Button, Badge} from 'reactstrap';
 import movieApi from '../../services/movieApi';
 import './styles.css';
 
-export default class MovieDatails extends Component {
+export default class MovieDetails extends Component {
 
     constructor() {
         super();
         this.state = {
-            movieDetails: {}
+            movieDetails: {},
+            genres: ['']
         }
     }
 
     componentDidMount() {
         const { id } = this.props.match.params;
-        this.findmovieDetails(id);
+        this.findMovieDetails(id);
     }
 
-    findmovieDetails = (id) => {
+    findMovieDetails = (id) => {
         movieApi.get(`https://api.themoviedb.org/3/movie/${id}?api_key=edfb0ea0d4a2c7c78cb457a8cf9d01cf&language=en-US`)
             .then((response) => {
                 return this.setState({
                     movieDetails: response.data,
+                    genres: response.data.genres
                 });
 
             })
@@ -31,25 +33,48 @@ export default class MovieDatails extends Component {
             });
     }
 
+    showGenres = () => {
+        const genresArray = this.state.genres;
+        return genresArray.map(value => {
+            return (
+                <Badge color="primary" id = "genre">{value.name}</Badge>
+            );
+        });
+    }
+
     render() {
         const movieDetails = this.state.movieDetails;
         return (
             <Container >
                 <NavBar />
                 <Container className="principal-container">
-                    <div class="flex-row flex-wrap no-gutters" style = {{display: "flex", alignItems: "flex-start",justifyContent: "center"}}>
-                        <div class="col-auto" style = {{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                            <img height="450" style={{ width: 300}} src={'http://image.tmdb.org/t/p/w300/' + movieDetails.poster_path} alt="imagem do filme" />
+                    <div className="flex-row flex-wrap no-gutters" id="movie-details">
+                        <div className="col-auto">
+                            <img id="movie-img"
+                                src={'http://image.tmdb.org/t/p/w300/' + movieDetails.poster_path}
+                                alt="movie" />
                         </div>
-                        <div class="col-lg-8 col-md-10" >
-                            <Card>
-                                <CardBody style={{ backgroundColor: "black" }}>
-                                    <div style = {{display: "flex", justifyContent: "space-between"}}>
-                                        <CardTitle><h3>{movieDetails.title}</h3></CardTitle>
-                                        <CardText style = {{display:"flex",justifyContent:"center",alignItems:"center",width: "50px",height:"50px",borderColor: "yellow", borderWidth: "4px", borderStyle: "solid", borderRadius: "30px"}}>{movieDetails.vote_average}</CardText>
+                        <div className="col-lg-8 col-md-10">
+                            <Card id = "principal-card">
+                                <CardHeader id = "card-header">
+                                    <div>
+                                        <h2>{movieDetails.title}</h2>
+                                        <CardText id = "rate-card">{movieDetails.vote_average}</CardText>
                                     </div>
-                                    <CardText>{movieDetails.overview}</CardText>
+                                    <CardSubtitle className = "text-properties"><strong>{movieDetails.tagline}</strong></CardSubtitle><br />
+                                </CardHeader>
+                                <CardBody id = "card-body">
+                                    <Button color="success">Add to my list</Button>
+                                    <CardText id = "overview-text" className = "text-properties">{movieDetails.overview}</CardText>
+                                    <CardText>
+                                        Genres: {
+                                            this.showGenres()
+                                        }
+                                    </CardText>
                                 </CardBody>
+                                <CardFooter id = "card-footer">
+
+                                </CardFooter>
                             </Card>
                         </div>
                     </div>
@@ -59,12 +84,3 @@ export default class MovieDatails extends Component {
         )
     }
 }
-
-
-/*<Container className="principal-container">
-                    <Card style = {{color: "black"}}>
-                        <CardBody>
-                            <CardTitle>{this.state.movieDetails.title}</CardTitle>
-                        </CardBody>
-                    </Card>
-                </Container>*/

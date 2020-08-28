@@ -28,14 +28,14 @@ export default class Login extends Component {
         var errors = [];
 
         if (!this.password || typeof this.password == undefined || this.password == null) {
-            errors.push('A senha não pode estar vazia');
+            errors.push('The password is empty');
         } else if (this.password.length < 6) {
-            errors.push('A senha deve possuir mais de 5 caracteres');
+            errors.push('Password must be longer than 5 characters');
         }
         if (!this.email || typeof this.email == undefined || this.email == null) {
-            errors.push('O email não pode estar vazio');
+            errors.push('The email cannot be empty');
         } else if (!this.email.includes('@') || !this.email.includes('.com')) {
-            errors.push('Email inválido');
+            errors.push('invalid email');
         }
         if (errors.length > 0) {
             return this.setState({
@@ -84,13 +84,13 @@ export default class Login extends Component {
                                 }
                                 <FormGroup>
                                     <Label for="email">Email</Label>
-                                    <Input type="text" id="email" onChange={e => this.email = e.target.value} placeholder="informe seu e-mail" />
+                                    <Input type="text" id="email" onChange={e => this.email = e.target.value} placeholder="inform you email" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="password">Senha</Label>
-                                    <Input type="password" id="password" onChange={e => this.password = e.target.value} placeholder="informe sua senha" />
+                                    <Label for="password">Password</Label>
+                                    <Input type="password" id="password" onChange={e => this.password = e.target.value} placeholder="inform you password" />
                                 </FormGroup>
-                                <Button color="primary" block onClick={this.signIn}>Entrar</Button>
+                                <Button color="primary" block onClick={this.signIn}>Log in</Button>
                             </Form>
                         </CardBody>
                     </Card>

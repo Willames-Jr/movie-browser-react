@@ -1,0 +1,65 @@
+.text-properties{
+    padding-top:15px;
+    font-size: 19.2px; 
+}
+
+#movie-details{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#movie-img{
+    height: 450;
+    width: 300;
+}
+
+#principal-card{
+    margin-top: 20px;
+    border-color: white;
+    background-color: #202324;
+    border-width: 2px; 
+    border-radius: 0;
+}
+
+#card-header div{
+    display: flex; 
+    justify-content: space-between; 
+}
+
+#rate-card{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 50px; 
+    height: 50px; 
+    border-color: yellow; 
+    border-width: 4px; 
+    border-style: solid; 
+    border-radius: 30px; 
+}
+
+#card-body{
+    padding-top: 0; 
+    display: flex; 
+    align-items: flex-start; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+}
+
+#card-footer{
+    height: 50px;
+    background-color: black;
+}
+
+#genre{
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+@media(min-width: 900px){
+    #principal-card{
+        margin: 0;
+        height: 450px;
+    }
+}
