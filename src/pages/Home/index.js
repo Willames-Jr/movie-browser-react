@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Card, CardImg, Col, Row, ButtonGroup, Button, InputGroup, Input, InputGroupAddon } from 'reactstrap';
-import loading from '../../assets/loading.gif';
-import noImage from '../../assets/no-image.jpg';
+import loading from '../../assets/images/loading.gif';
+import noImage from '../../assets/images/no-image.jpg';
 import NavBar from '../../components/NavBar';
 import './styles.css';
 import movieApi from '../../services/movieApi';
@@ -16,7 +16,7 @@ export default class Home extends Component {
         this.divInfiniteScrollRef = React.createRef();
         this.state = {
             movieSearch: '',
-            title: 'Filmes Populares:',
+            title: 'Popular Movies:',
             result: [],
             page: 1,
             buttonClicked: 'popularity',
@@ -193,8 +193,8 @@ export default class Home extends Component {
                         <Card className="movie-image" width={400} height={400}>
                             {
                                 movie.poster_path === null
-                                    ? <CardImg height={294} top src={noImage} alt="imagem do filme nulo" />
-                                    : <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="imagem do filme" />
+                                    ? <CardImg height={294} top src={noImage} alt="no image" />
+                                    : <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="movie" />
                             }
                         </Card>
                     </Col>
@@ -207,13 +207,13 @@ export default class Home extends Component {
         var titleMessage;
 
         if (this.state.buttonClicked === 'popularity') {
-            titleMessage = 'Filmes populares:';
+            titleMessage = 'Popular movies:';
         }
         if (this.state.buttonClicked === 'vote') {
-            titleMessage = 'Filmes bem avaliados:';
+            titleMessage = 'Top rated movies:';
         }
         if (this.state.buttonClicked === 'date') {
-            titleMessage = 'Proximos lançamentos:';
+            titleMessage = 'Upcoming movies:';
         }
         return this.setState({
             title: titleMessage
@@ -226,7 +226,8 @@ export default class Home extends Component {
                 <NavBar />
                 <Container className="principal-container">
                     <InputGroup>
-                        <Input placeholder="Pesquisar filme" onChange={(e) => this.onSearchUpdate(e.target.value)} />
+                        <Input placeholder="Search movie" 
+                        onChange={(e) => this.onSearchUpdate(e.target.value)} />
                         <InputGroupAddon addonType="prepend">
                             <Button color="primary">
                                 <i className="fa fa-search"></i>
@@ -234,9 +235,21 @@ export default class Home extends Component {
                         </InputGroupAddon>
                     </InputGroup>
                     <ButtonGroup className="mt-3">
-                        <Button color={this.state.buttonClicked === 'popularity' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('popularity') }}>Popularidade</Button>
-                        <Button color={this.state.buttonClicked === 'date' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('date') }}>Em breve</Button>
-                        <Button color={this.state.buttonClicked === 'vote' ? 'success' : 'secondary'} onClick={(e) => { this.buttonClick('vote') }}>Melhores avaliações</Button>
+                        <Button 
+                        color={this.state.buttonClicked === 'popularity' ? 'success' : 'secondary'} 
+                        onClick={(e) => { this.buttonClick('popularity') }}
+                        >Popular</Button>
+
+                        <Button 
+                        color={this.state.buttonClicked === 'date' ? 'success' : 'secondary'} 
+                        onClick={(e) => { this.buttonClick('date') }}
+                        >Upcoming</Button>
+
+                        <Button 
+                        color={this.state.buttonClicked === 'vote' ? 'success' : 'secondary'} 
+                        onClick={(e) => { this.buttonClick('vote') }}
+                        >Top rated</Button>
+
                     </ButtonGroup>
                     <h2 className="mt-4" >{this.state.title}</h2>
                     <Row xs="2" md="3" lg="4" xl="5" className="mt-3" >
@@ -246,8 +259,8 @@ export default class Home extends Component {
                         <div className="mt-4" ref={this.divInfiniteScrollRef}><p></p></div>
                     </Row>
                     {this.state.showLoading &&
-                        <Container style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <img style={{ display: "flex", alignSelf: "center" }} height="50" width="50" alt="Carregando" src={loading} />
+                        <Container id = "loading-container">
+                            <img height="50" width="50" alt="loading" src={loading} />
                         </Container>
                     }
                 </Container>

@@ -14,7 +14,7 @@ const PrivateRoute = ({component:Component, ...rest}) => {
             ):(
                 <Redirect to={{
                     pathname: '/',
-                    state: {message: 'Você deve estar logado'}
+                    state: {message: 'You must be logged in'}
                 }}/>
             )}
         />

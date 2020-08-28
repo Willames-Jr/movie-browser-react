@@ -5,3 +5,9 @@
 .movie-image:hover{
     transform: scale(1.1);
 }
+
+#loading-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
