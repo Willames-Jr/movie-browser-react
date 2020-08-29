@@ -3,10 +3,29 @@
     font-size: 19.2px; 
 }
 
+.actor-image{
+    width: 100%;
+    min-height: 50px;
+    padding: 10px;
+}
+
+.content-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #movie-details{
     display: flex;
     align-items: flex-start;
     justify-content: center;
+}
+
+#cast-header{
+    color: black;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }
 
 #movie-img{
@@ -58,6 +77,12 @@
 }
 
 @media(min-width: 900px){
+
+    .no-mp-desktop{
+        margin: 0;
+        padding: 0;        
+    }
+
     #principal-card{
         margin: 0;
         height: 450px;

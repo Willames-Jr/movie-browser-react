@@ -25,12 +25,12 @@ const NavBar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="#">Pesquisar</NavLink>
+              <NavLink href="#">Search</NavLink>
             </NavItem>
           </Nav>
           <NavbarText>
             <Button color="success" href="/login">Login</Button>{' '}
-            <Button color="primary">Cadastre-se</Button>
+            <Button color="primary">Sing In</Button>
           </NavbarText>
         </Collapse>
       </Navbar>
