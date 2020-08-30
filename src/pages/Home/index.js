@@ -88,10 +88,9 @@ export default class Home extends Component {
 
             } else {
                 this.changeTitle();
-                this.buttonClick(this.state.buttonClicked);
+                this.buttonClick("popularity");
             }
         });
-
     }
 
     getMoviesByName = (movieName) => {
@@ -109,7 +108,7 @@ export default class Home extends Component {
                         result: response.data.results,
                         showLoading: false
                     });
-                }
+                }   
             })
             .catch((error) => {
                 console.log(error);

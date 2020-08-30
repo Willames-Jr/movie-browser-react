@@ -3,10 +3,37 @@
     font-size: 19.2px; 
 }
 
+.movie-icon{
+    font-size: 1.5em;
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .actor-image{
     width: 100%;
     min-height: 50px;
     padding: 10px;
+}
+
+.information-header{
+    color: black;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.small, small {
+    font-size: 80%;
+    font-weight: 400;
+}
+
+.movie-cast_info {
+    color: black;
+    background: rgba(0,0,0,.1);
+    width: 100%;
+    min-height: 50px;
+    padding: 10px;
+    text-align: center;
 }
 
 .content-center{
@@ -19,13 +46,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-}
-
-#cast-header{
-    color: black;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
 }
 
 #movie-img{
@@ -67,8 +87,16 @@
 }
 
 #card-footer{
-    height: 50px;
-    background-color: black;
+    background-color: rgba(0,0,0,.8);
+    width: 100%;
+    padding: 15px;
+    font-size: 1em;
+    color: #adb5bd;
+    grid-area: stat;
+    align-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #genre{
