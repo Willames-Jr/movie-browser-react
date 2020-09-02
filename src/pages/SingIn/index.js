@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button, Alert, Card, CardBody, Container } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Card, CardBody, Container, Button, Alert } from 'reactstrap';
+import NavBar from '../../components/NavBar';
 import Header from '../../components/Header';
 import usersApi from '../../services/usersApi';
-import NavBar from '../../components/NavBar';
-import './styles.css'
-export default class Login extends Component {
+
+export default class SingIn extends Component {
 
     constructor(props) {
         console.log(props);
@@ -16,15 +16,11 @@ export default class Login extends Component {
 
     showErrors = () => {
         return this.state.message.map((err) => {
-            if(err === "You have been registered make your login"){
-                return <Alert color="success" key={err} className="text-center">{err}</Alert>
-            }
             return <Alert color="danger" key={err} className="text-center">{err}</Alert>
-        });
+        })
     }
 
-    login = () => {
-
+    signIn = () => {
         var errors = [];
 
         if (!this.password || typeof this.password == undefined || this.password == null) {
@@ -37,28 +33,32 @@ export default class Login extends Component {
         } else if (!this.email.includes('@') || !this.email.includes('.com')) {
             errors.push('invalid email');
         }
+        if (!this.name || typeof this.name == undefined || this.name == null) {
+            errors.push('The name cannot be empty');
+        }
         if (errors.length > 0) {
             return this.setState({
                 message: errors
             });
+
         }
+        
+        const data = this.avatar !== "" ? {name:this.name, avatar: this.avatar, email: this.email, password: this.password} : {name:this.name, email: this.email, password: this.password} 
 
-        const data = {
-            email: this.email, password: this.password
-        };
-
-        usersApi.post('login', data)
+        usersApi.post('register', data)
             .then(response => {
                 if (response.data.error) {
                     return this.setState({
                         message: [response.data.error]
                     });
                 }
-                localStorage.setItem('token', response.data.token);
                 this.setState({
                     message: []
                 });
-                this.props.history.push('/admin');
+                this.props.history.push({
+                    pathname: '/login',
+                    state: {message: 'You have been registered make your login'}
+                });
                 return;
             }).catch(err => {
                 this.setState({
@@ -71,30 +71,38 @@ export default class Login extends Component {
         return (
             <div>
                 <NavBar />
-                <Container id="container">
-                    <Card id="card">
+                <Container id = "container">
+                    <Card id = "card">
                         <CardBody>
                             <Form>
-                                <Header title="Login" />
-                                <hr className="my-3" />
+                                <Header title = "Sing in"/>
+                                <hr className = "my-3"/>
                                 {
                                     this.showErrors()
                                 }
                                 <FormGroup>
-                                    <Label for="email" style={{ color: "black" }}>Email:</Label>
-                                    <Input type="text" id="email" onChange={e => this.email = e.target.value} placeholder="inform you email" />
+                                    <Label for="name">*Name:</Label>
+                                    <Input type="text" id="name" onChange={e => this.name = e.target.value} placeholder="enter your name" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="password" style={{ color: "black" }}>Password:</Label>
-                                    <Input type="password" id="password" onChange={e => this.password = e.target.value} placeholder="inform you password" />
+                                    <Label for="avatar">Avatar:</Label>
+                                    <Input type="text" id="avatar" onChange={e => this.avatar = e.target.value} placeholder="enter a link to an image" />
                                 </FormGroup>
-                                <Button color="primary" block onClick={this.login}>Log in</Button>
+                                <FormGroup>
+                                    <Label for="email">*Email:</Label>
+                                    <Input type="email" id="email" onChange={e => this.email = e.target.value} placeholder="enter your email" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="password">*Password:</Label>
+                                    <Input type="password" id="password" onChange={e => this.password = e.target.value} placeholder="enter your password" />
+                                </FormGroup>
+                                <small>Fields with * are required</small>
+                                <Button className = "mt-3" color="primary" block onClick={this.signIn}>Sing in</Button>
                             </Form>
                         </CardBody>
                     </Card>
                 </Container>
-
             </div>
         );
-    }
+    };
 }

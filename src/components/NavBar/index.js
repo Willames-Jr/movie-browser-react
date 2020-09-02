@@ -11,6 +11,7 @@ import {
   Button
 } from 'reactstrap';
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,9 @@ const NavBar = (props) => {
   return (
     <div>
       <Navbar color="dark" dark expand="md" fixed="top">
-        <NavbarBrand href="/">Movie App</NavbarBrand>
+        <Link to = "/">
+          <NavbarBrand>Movie App</NavbarBrand>
+        </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -29,8 +32,12 @@ const NavBar = (props) => {
             </NavItem>
           </Nav>
           <NavbarText>
-            <Button color="success" href="/login">Login</Button>{' '}
-            <Button color="primary">Sing In</Button>
+            <Link to = "/login">
+              <Button color="success">Login</Button>{' '}
+            </Link>
+            <Link to = "/singin">
+              <Button color="primary">Sing In</Button>
+            </Link>
           </NavbarText>
         </Collapse>
       </Navbar>
