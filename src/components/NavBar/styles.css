@@ -13,3 +13,34 @@
     pointer-events: none;
     color: #aaa;
 }
+
+#user-icon img{
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+
+#user-icon{
+    font-size: 22px;
+    color: white;
+    vertical-align: auto;
+}
+
+#logout-button{
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+@media(min-width: 770px){
+    #user-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #logout-button{
+        margin-top: 0;
+        margin-left: 20px;
+    }
+}
