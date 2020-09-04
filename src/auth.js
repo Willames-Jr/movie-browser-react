@@ -5,7 +5,7 @@ const isAuth = () =>{
     return localStorage.getItem('token') !== null;
 }
 
-const PrivateRoute = ({component:Component, ...rest}) => {
+export const PrivateRoute = ({component:Component, ...rest}) => {
     return (
         <Route
             {...rest}
@@ -21,4 +21,18 @@ const PrivateRoute = ({component:Component, ...rest}) => {
     );
 }
 
-export default PrivateRoute;
+export const AuthRoute = ({component:Component, ...rest}) => {
+    return (
+        <Route
+            {...rest}
+            render = { props => isAuth() ?(
+                <Redirect to={{
+                    pathname: '/dashboard',
+                    state: {message: 'You must be logged in'}
+                }}/>
+            ): (
+                <Component {...props}/>
+            )}
+        />
+    );
+}

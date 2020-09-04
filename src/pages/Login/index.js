@@ -54,11 +54,18 @@ export default class Login extends Component {
                         message: [response.data.error]
                     });
                 }
+
+                const user = {
+                    name: response.data.result.name,
+                    avatar: response.data.result.avatar
+                };
+
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(user));
                 this.setState({
                     message: []
                 });
-                this.props.history.push('/admin');
+                this.props.history.push('/dashboard');
                 return;
             }).catch(err => {
                 this.setState({
