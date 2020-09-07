@@ -24,10 +24,10 @@ const NavBar = (props) => {
       return (
         <div>
           <NavbarText id="user-icon">
-            <div>
+            <Link to = "/dashboard" style = {{textDecoration: "none"}}>
               <b>{user.name}</b>
-              <img src="https://i0.wp.com/ipc.digital/wp-content/uploads/2016/07/icon-user-default.png?fit=462%2C462&ssl=1" />
-            </div>
+              <img src="https://i0.wp.com/ipc.digital/wp-content/uploads/2016/07/icon-user-default.png?fit=462%2C462&ssl=1" alt = "user avatar" />
+            </Link><br/>
             <Link to="/logout">
               <Button id = "logout-button" color="danger">Logout</Button>
             </Link>

@@ -213,18 +213,3 @@ export default class MovieDetails extends Component {
         )
     }
 }
-
-/*
-<Row xs="1" lg="2">
-                                        <Col className="content-center fa fa-clock-o"></Col>
-                                    <Col className="content-center" >Duration: {movieDetails.runtime}</Col>
-                                    </Row>
-                                    <Row xs="1" lg="2">
-                                        <Col className="content-center fa fa-calendar"></Col>
-                                        <Col className="content-center">Releasedataasdsdas</Col>
-                                    </Row>
-                                    <Row xs="1" lg="2">
-                                        <Col className="content-center fa fa-money"></Col>
-                                        <Col className="content-center">Budget</Col>
-                                    </Row>
-*/

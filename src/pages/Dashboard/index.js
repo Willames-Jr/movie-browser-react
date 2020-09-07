@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../../components/Header';
 import usersApi from '../../services/usersApi';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
