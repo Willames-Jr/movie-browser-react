@@ -8,6 +8,12 @@ body{
     top: 5.2rem;
 }
 
+.avatar-icon{
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
+
 .flex-center{
     display: flex;
     align-items: center;

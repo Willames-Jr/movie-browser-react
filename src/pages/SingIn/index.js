@@ -47,9 +47,9 @@ export default class SingIn extends Component {
 
         usersApi.post('register', data)
             .then(response => {
-                if (response.data.error) {
+                if (response.data.message) {
                     return this.setState({
-                        message: [response.data.error]
+                        message: [response.data.message]
                     });
                 }
                 this.setState({

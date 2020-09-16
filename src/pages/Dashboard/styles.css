@@ -1,0 +1,14 @@
+#user-infos{
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-border {
+    background-color: #202324;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: solid;
+}
