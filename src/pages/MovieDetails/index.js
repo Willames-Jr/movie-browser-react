@@ -129,6 +129,24 @@ export default class MovieDetails extends Component {
         });
     }
 
+    minutesToTimeString = (minutes) => {
+        const hours = Math.floor(minutes / 60);
+        const minutesMinusHours = minutes - (hours * 60);
+
+        return `${hours}h ${minutesMinusHours}min`;
+    }
+
+    stringFormatter = (stringDate) => {
+        if (stringDate === undefined) {
+            return;
+        }
+
+        const stringSplit = stringDate.split('-');
+
+        return (`${stringSplit[2]}/${stringSplit[1]}/${stringSplit[0]}`);
+
+    }
+
     render() {
         const movieDetails = this.state.movieDetails;
         return (
@@ -159,14 +177,14 @@ export default class MovieDetails extends Component {
                                         }
                                     </CardText>
                                 </CardBody>
-                                <CardFooter id="card-footer" style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <CardFooter id="card-footer">
                                     <div>
                                         <i className="fa fa-clock-o movie-icon"></i>
-                                        Duration:
+                                        Duration: {this.minutesToTimeString(movieDetails.runtime)}
                                     </div>
-                                    <div>
+                                    <div >
                                         <i className="fa fa-calendar movie-icon"></i>
-                                        Release date:
+                                        Release date: {this.stringFormatter(movieDetails.release_date)}
                                     </div>
                                     <div>
                                         <i className="fa fa-money movie-icon"></i>

@@ -90,17 +90,16 @@
     background-color: rgba(0,0,0,.8);
     width: 100%;
     padding: 15px;
-    font-size: 1em;
+    font-size: 1rem;
     color: #adb5bd;
-    grid-area: stat;
-    align-self: end;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #genre{
     margin-right: 6px;
+    margin-top: 6px;
     font-size: 16px;
 }
 
