@@ -7,7 +7,6 @@ import './styles.css'
 export default class Login extends Component {
 
     constructor(props) {
-        console.log(props);
         super(props);
         this.state = {
             message: this.props.location.state === undefined ? [] : [this.props.location.state.message]
@@ -56,6 +55,7 @@ export default class Login extends Component {
                 }
 
                 const user = {
+                    id: response.data.result._id,
                     name: response.data.result.name,
                     avatar: response.data.result.avatar
                 };

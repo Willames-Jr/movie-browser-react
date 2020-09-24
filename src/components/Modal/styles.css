@@ -1,0 +1,25 @@
+.popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#container-create{
+    border-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#container-info{
+    border-color: white;
+}
+
+#container-info-div{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#lists{
+    padding-left: 20px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../../components/NavBar';
-import { Container, CardText, Card, CardBody, CardSubtitle, CardHeader, CardFooter, Button, Badge, Col, Row, CardImg } from 'reactstrap';
+import { Container, CardText, Card, CardBody, CardSubtitle, CardHeader, CardFooter, Button, Badge, Col, Row, CardImg} from 'reactstrap';
+import Modal from '../../components/Modal';
 import movieApi from '../../services/movieApi';
 import noImage from '../../assets/images/no-image.jpg'
 import './styles.css';
@@ -169,7 +170,7 @@ export default class MovieDetails extends Component {
                                     <CardSubtitle className="text-properties"><strong>{movieDetails.tagline}</strong></CardSubtitle><br />
                                 </CardHeader>
                                 <CardBody id="card-body">
-                                    <Button color="success">Add to my list</Button>
+                                    <Modal/>
                                     <CardText id="overview-text" className="text-properties">{movieDetails.overview}</CardText>
                                     <CardText>
                                         Genres: {
