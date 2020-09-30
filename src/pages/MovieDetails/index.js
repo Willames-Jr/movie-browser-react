@@ -109,7 +109,7 @@ export default class MovieDetails extends Component {
         const genresArray = this.state.genres;
         return genresArray.map(value => {
             return (
-                <Badge color="primary" id="genre">{value.name}</Badge>
+                <Badge color="primary" id="genre" key = {value.name}>{value.name}</Badge>
             );
         });
     }

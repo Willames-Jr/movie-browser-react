@@ -23,3 +23,9 @@
 #lists{
     padding-left: 20px;
 }
+
+#lists-body{
+    height: 300px;
+    overflow:auto;
+    padding-bottom: 0;
+}

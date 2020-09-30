@@ -28,7 +28,6 @@ export default class Home extends Component {
         this.getMoviesByPopularity();
         const intersecterObserver = new IntersectionObserver((entires) => {
             const ratio = entires[0].intersectionRatio;
-            console.log(this.state.totalPages);
             if (ratio > 0) {
                 this.setState({
                     page: this.state.page + 1,

@@ -97,6 +97,10 @@
     justify-content: space-around;
 }
 
+#card-footer div{
+    margin-right: 5px;
+}
+
 #genre{
     margin-right: 6px;
     margin-top: 6px;

@@ -8,8 +8,34 @@ export default class Modal extends Component {
     constructor() {
         super();
         this.state = {
-            hidden: true
+            hidden: true,
+            allLists: []
         };
+    }
+
+    componentDidUpdate() {
+        this.loadLists();
+    }
+
+    loadLists = () => {
+
+        usersApi.get(`lists/${JSON.parse(localStorage.getItem('user')).id}`)
+        .then((response) => {
+            this.setState({
+                allLists: response.data.results
+            });
+        }).catch((err) => {
+
+        })
+
+    }
+
+    showAllLists = () =>{
+        return this.state.allLists.map(list => {
+            return (
+                <li key = {list.name}><Button color = "success" className = "mb-2">{list.name}</Button></li>
+            );
+        });
     }
 
     createList = (closeFunction) => {
@@ -38,15 +64,11 @@ export default class Modal extends Component {
                     <CardHeader style={{ borderColor: "white" }}>
                         <h4>Add to list... </h4>
                     </CardHeader>
-                    <CardBody>
+                    <CardBody id  = "lists-body">
                         <ul id="lists">
-                            <li>oal</li>
-                            <li>oal</li>
-                            <li>oal</li>
-                            <li>oal</li>
+                            {this.showAllLists()}
                         </ul>
                     </CardBody>
-                    
                         {hidden ?
                         <CardFooter onClickCapture={() => { this.setState({ hidden: false }) }} id="container-create">
                             <div>
