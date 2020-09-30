@@ -170,7 +170,7 @@ export default class MovieDetails extends Component {
                                     <CardSubtitle className="text-properties"><strong>{movieDetails.tagline}</strong></CardSubtitle><br />
                                 </CardHeader>
                                 <CardBody id="card-body">
-                                    <Modal/>
+                                    <Modal movieId = {movieDetails.id}/>
                                     <CardText id="overview-text" className="text-properties">{movieDetails.overview}</CardText>
                                     <CardText>
                                         Genres: {

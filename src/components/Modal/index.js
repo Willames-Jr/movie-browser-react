@@ -18,7 +18,6 @@ export default class Modal extends Component {
     }
 
     loadLists = () => {
-
         usersApi.get(`lists/${JSON.parse(localStorage.getItem('user')).id}`)
         .then((response) => {
             this.setState({
@@ -26,15 +25,21 @@ export default class Modal extends Component {
             });
         }).catch((err) => {
 
-        })
-
+        });
     }
 
-    showAllLists = () =>{
-        return this.state.allLists.map(list => {
-            return (
-                <li key = {list.name}><Button color = "success" className = "mb-2">{list.name}</Button></li>
-            );
+    addMovieToList = (listId, closeFunction) => {
+        usersApi.post(`lists/movie/${JSON.parse(localStorage.getItem('user')).id}`,{
+            list_id: listId,
+            movie: this.props.movieId
+        },{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        }).then(() => {
+            closeFunction();
+        }).catch((error) => {
+            console.log(error);
         });
     }
 
@@ -45,15 +50,20 @@ export default class Modal extends Component {
             headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}` 
             }
-        }
-        ).then(() => {
-            console.log(localStorage.getItem('token'))
-            console.log(JSON.parse(localStorage.getItem('user')).id)
-            console.log(this.name)
+        }).then(() => {
             closeFunction();
         }).catch((err) => {
             console.log(err);
         })
+    }
+
+    
+    showAllLists = (closeFunction) =>{
+        return this.state.allLists.map(list => {
+            return (
+                <li key = {list.name}><Button color = "success" onClick = {e => {this.addMovieToList(list._id,closeFunction)}} className = "mb-2">{list.name}</Button></li>
+            );
+        });
     }
 
     render() {
@@ -66,7 +76,7 @@ export default class Modal extends Component {
                     </CardHeader>
                     <CardBody id  = "lists-body">
                         <ul id="lists">
-                            {this.showAllLists()}
+                            {this.showAllLists(close)}
                         </ul>
                     </CardBody>
                         {hidden ?
