@@ -2,6 +2,35 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
+.fixed-bottom{
+    position: fixed;
+    bottom: 4px;
+}
+
+#lists-body button{
+    outline: none;
+}
+
+.unclicked-button{
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: solid 3px green;
+    border-radius: 4px;
+    box-shadow: none;
+    transition-duration: 0.2s;
+}
+
+.clicked-button{
+    width: 20px;
+    height: 20px;
+    background: none green;
+    border: solid 3px green;
+    border-radius: 4px;
+    transition-duration: 0.2s;
+    color: white;
+}
+
 #container-create{
     border-color: white;
     cursor: pointer;
@@ -24,8 +53,15 @@
     padding-left: 20px;
 }
 
+#list-select{
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
 #lists-body{
-    height: 300px;
+    height: 250px;
     overflow:auto;
     padding-bottom: 0;
 }

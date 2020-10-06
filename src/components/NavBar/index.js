@@ -51,7 +51,7 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <Navbar color="dark" dark expand="md" fixed="top">
+      <Navbar color="dark" dark expand="md" fixed="top" >
         <Link to="/">
           <NavbarBrand>
             <h3><i className="fa fa-film mr-2"></i>Movie App</h3>

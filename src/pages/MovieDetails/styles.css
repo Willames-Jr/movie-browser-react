@@ -49,8 +49,12 @@
 }
 
 #movie-img{
-    height: 450;
-    width: 300;
+    height: 500px;
+    width: 300px !important;
+}
+
+#overview-text{
+    font-weight: 300;
 }
 
 #principal-card{
@@ -116,6 +120,6 @@
 
     #principal-card{
         margin: 0;
-        height: 450px;
+        height: 500px;
     }
 }
