@@ -38,7 +38,7 @@ const NavBar = (props) => {
     return (
       <NavbarText>
         <Link to="/login">
-          <Button color="success">Login</Button>{' '}
+          <Button color="success" className = "mr-2">Login</Button>
         </Link>
         <Link to="/singin">
           <Button color="primary">Sing In</Button>

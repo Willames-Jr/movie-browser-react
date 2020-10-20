@@ -5,6 +5,7 @@ import Modal from '../../components/Modal';
 import movieApi from '../../services/movieApi';
 import noImage from '../../assets/images/no-image.jpg'
 import './styles.css';
+import MovieImg from '../../components/MovieImg';
 
 export default class MovieDetails extends Component {
 
@@ -20,11 +21,22 @@ export default class MovieDetails extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const { id } = this.props.match.params;
         this.findMovieDetails(id);
         this.findMovieCast(id);
         this.findRecommendations(id);
     }
+
+    async componentDidUpdate(prevProps) {
+        const { id } = this.props.match.params;
+        if ( id !== prevProps.match.params.id) {
+            window.scrollTo(0, 0);
+            this.findMovieDetails(id);
+            this.findMovieCast(id);
+            this.findRecommendations(id);
+        }
+      }
 
     findMovieDetails = (id) => {
         movieApi.get(`https://api.themoviedb.org/3/movie/${id}?api_key=edfb0ea0d4a2c7c78cb457a8cf9d01cf&language=en-US`)
@@ -117,15 +129,7 @@ export default class MovieDetails extends Component {
     showRecommendations = () => {
         return this.state.recommendations.map((movie) => {
             return (
-                <Col key={movie.id} className="mt-3">
-                    <Card className="movie-image" width={400} height={400}>
-                        {
-                            movie.poster_path === null
-                                ? <CardImg height={294} top src={noImage} alt="no image" />
-                                : <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="movie" />
-                        }
-                    </Card>
-                </Col>
+                <MovieImg movieId = {movie.id} posterPath = {movie.poster_path}/>
             );
         });
     }

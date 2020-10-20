@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Card, CardImg, Col, Row, ButtonGroup, Button, InputGroup, Input, InputGroupAddon } from 'reactstrap';
+import { Container, Row, ButtonGroup, Button, InputGroup, Input, InputGroupAddon } from 'reactstrap';
 import loading from '../../assets/images/loading.gif';
-import noImage from '../../assets/images/no-image.jpg';
 import NavBar from '../../components/NavBar';
 import './styles.css';
 import movieApi from '../../services/movieApi';
-import { Link } from 'react-router-dom';
+import MovieImg from '../../components/MovieImg';
 
 export default class Home extends Component {
 
@@ -186,17 +185,7 @@ export default class Home extends Component {
     showMovies = () => {
         return this.state.result.map(movie => {
             return (
-                <Link to= {`/moviedetails/${movie.id}`} >
-                    <Col key={movie.id} className="mt-3">
-                        <Card className="movie-image" width={400} height={400}>
-                            {
-                                movie.poster_path === null
-                                    ? <CardImg height={294} top src={noImage} alt="no image" />
-                                    : <CardImg top src={'http://image.tmdb.org/t/p/w300/' + movie.poster_path} alt="movie" />
-                            }
-                        </Card>
-                    </Col>
-                </Link>
+                <MovieImg movieId = {movie.id} posterPath = {movie.poster_path}></MovieImg>
             );
         });
     }
