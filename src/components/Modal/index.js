@@ -53,21 +53,6 @@ export default class Modal extends Component {
             });
     }
 
-    addMovieToList = (listId, closeFunction) => {
-        usersApi.post(`lists/movie/${JSON.parse(localStorage.getItem('user')).id}`, {
-            list_id: listId,
-            movie: this.props.movieId
-        }, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(() => {
-            console.log('ok')
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
-
     createList = (closeFunction) => {
         usersApi.post(`lists/${JSON.parse(localStorage.getItem('user')).id}`, {
             list_name: this.name
@@ -97,7 +82,6 @@ export default class Modal extends Component {
             }).then(() => {
                 newCheckedList[listName] = !this.state.checkedLists[listName];
                 alertMessage += 'Added to ';
-                console.log('added')
             }).catch((error) => {
                 console.log(error);
             });
@@ -111,15 +95,11 @@ export default class Modal extends Component {
                     movie: this.props.movieId
                 }
             }).then((response) => {
-                console.log(response)
                 if (response.status >= 401) {
-                    console.log(listId)
-                    console.log(this.props.movieId)
                     newCheckedList[listName] = true;
                 }
                 newCheckedList[listName] = false;
                 alertMessage += 'Deleted from the ';
-                console.log('deleted')
             }).catch((error) => {
                 console.log(error);
             });

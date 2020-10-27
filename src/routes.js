@@ -7,6 +7,7 @@ import {PrivateRoute,AuthRoute} from './auth';
 import Logout from './pages/Logout';
 import MovieDetails from './pages/MovieDetails';
 import SingIn from './pages/SingIn';
+import ListDetails from './pages/ListDetails';
 
 const Routes = () => (
     <Router>
@@ -17,6 +18,7 @@ const Routes = () => (
             <AuthRoute exact path="/singin" component = {SingIn}/>
             <Route exact path="/logout" component={Logout}/>
             <Route path="/moviedetails/:id" component = {MovieDetails}/>
+            <Route path="/list/:user_id/:list_id" component = {ListDetails}/>
         </Switch>
     </Router>
 )

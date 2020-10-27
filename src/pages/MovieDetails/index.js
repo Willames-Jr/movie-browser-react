@@ -36,10 +36,10 @@ export default class MovieDetails extends Component {
             this.findMovieCast(id);
             this.findRecommendations(id);
         }
-      }
+    }
 
     findMovieDetails = (id) => {
-        movieApi.get(`https://api.themoviedb.org/3/movie/${id}?api_key=edfb0ea0d4a2c7c78cb457a8cf9d01cf&language=en-US`)
+        movieApi.get(`movie/${id}?api_key=edfb0ea0d4a2c7c78cb457a8cf9d01cf&language=en-US`)
             .then((response) => {
                 return this.setState({
                     movieDetails: response.data,

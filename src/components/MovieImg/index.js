@@ -6,6 +6,7 @@ import noImage from '../../assets/images/no-image.jpg';
 import './styles.css'
 
 export default class MovieImg extends Component {
+    
     render() {
         return (
             <Link to={`/moviedetails/${this.props.movieId}`} >
