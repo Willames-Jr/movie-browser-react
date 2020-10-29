@@ -75,7 +75,7 @@ export default class Home extends Component {
     onSearchUpdate = (movieName) => {
         this.setState({
             movieSearch: movieName,
-            title: `Resultados de "${movieName}":`,
+            title: `Results of "${movieName}":`,
             result: [],
             page: 1,
             buttonClicked: 'none'

@@ -61,7 +61,7 @@ const NavBar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="#"><h5>Reviews</h5></NavLink>
+              <NavLink href="#"><h5>Reviews (coming son)</h5></NavLink>
             </NavItem>
           </Nav>
           {showAvatar()}

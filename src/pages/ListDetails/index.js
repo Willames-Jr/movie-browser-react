@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import { Container, Row } from 'reactstrap';
-import MovieImg from '../../components/MovieImg';
 import MovieInList from '../../components/MovieInList';
 import NavBar from '../../components/NavBar';
 import movieApi from '../../services/movieApi';
