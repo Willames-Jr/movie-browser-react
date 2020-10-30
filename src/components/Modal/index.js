@@ -20,7 +20,7 @@ export default class Modal extends Component {
     }
 
     componentWillUpdate(nextProps) {
-        if (typeof nextProps.movieId !== 'undefined' && nextProps.movieId !== this.props.movieId) {
+        if (typeof nextProps.movieId !== 'undefined' && nextProps.movieId !== this.props.movieId && typeof localStorage.getItem('user') === undefined) {
             this.loadLists();
         }
     }
