@@ -62,7 +62,10 @@ export default class DashBoard extends Component {
                         <CardHeader style={{ borderColor: "white" }}><h3>Your movie lists:</h3></CardHeader>
                         <CardBody>
                             <ul>
-                                {this.showLists()}
+                                {this.state.allLists ? 
+                                    <h2>No lists found, try to create one</h2>
+                                    : this.showLists()
+                                }
                             </ul>
                         </CardBody>
                     </Card>
