@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import NavBar from '../../components/NavBar';
 import { Container, CardText, Card, CardBody, CardSubtitle, CardHeader, CardFooter, Button, Badge, Col, Row, CardImg} from 'reactstrap';
-import Modal from '../../components/Modal';
 import movieApi from '../../services/movieApi';
 import noImage from '../../assets/images/no-image.jpg'
 import './styles.css';
 import MovieImg from '../../components/MovieImg';
+import { Link } from 'react-router-dom';
+import CreateListModal from '../../components/CreateListModal';
 
 export default class MovieDetails extends Component {
 
@@ -169,12 +170,17 @@ export default class MovieDetails extends Component {
                                 <CardHeader id="card-header">
                                     <div>
                                         <h2>{movieDetails.title}</h2>
-                                        <CardText id="rate-card">{movieDetails.vote_average}</CardText>
+                                        <CardText className="rate-card">{movieDetails.vote_average}</CardText>
                                     </div>
                                     <CardSubtitle className="text-properties"><strong>{movieDetails.tagline}</strong></CardSubtitle><br />
                                 </CardHeader>
                                 <CardBody id="card-body">
-                                    <Modal movieId = {movieDetails.id}/>
+                                    <div>
+                                        <CreateListModal movieId = {movieDetails.id} />
+                                        <Link to = {`/write_review/${movieDetails.id}/${movieDetails.title}`}>
+                                            <Button color = "info" className = "ml-4"> <i className="fa fa-edit"></i> Write a review</Button>
+                                        </Link>
+                                    </div>
                                     <CardText id="overview-text" className="text-properties">{movieDetails.overview}</CardText>
                                     <CardText>
                                         Genres: {

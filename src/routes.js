@@ -8,6 +8,10 @@ import Logout from './pages/Logout';
 import MovieDetails from './pages/MovieDetails';
 import SingIn from './pages/SingIn';
 import ListDetails from './pages/ListDetails';
+import WriteReview from './pages/WriteReview';
+import UpdateReview from './pages/UpdateReview';
+import Reviews from './pages/Reviews';
+import ReviewDetails from './pages/ReviewDetails';
 
 const Routes = () => (
     <Router>
@@ -19,6 +23,10 @@ const Routes = () => (
             <Route exact path="/logout" component={Logout}/>
             <Route path="/moviedetails/:id" component = {MovieDetails}/>
             <Route path="/list/:user_id/:list_id" component = {ListDetails}/>
+            <PrivateRoute path= "/write_review/:movie_id/:movie_name" component = {WriteReview}/>
+            <Route exact path="/reviews" component = {Reviews}></Route>
+            <Route path="/reviews/:review" component = {ReviewDetails}></Route>
+            <PrivateRoute path = "/update_review/:movie_id" component = {UpdateReview}/>
         </Switch>
     </Router>
 )

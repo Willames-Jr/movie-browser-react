@@ -6,7 +6,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   NavbarText,
   Button
 } from 'reactstrap';
@@ -60,8 +59,10 @@ const NavBar = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="#"><h5>Reviews (coming son)</h5></NavLink>
+            <NavItem >
+              <Link to="/reviews" className="reviews-link">
+                <h5 id = "reviews-text">Reviews</h5>
+              </Link>
             </NavItem>
           </Nav>
           {showAvatar()}

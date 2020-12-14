@@ -14,6 +14,21 @@
     color: #aaa;
 }
 
+.reviews-link{
+    text-decoration: none;
+    color:white;
+}
+
+.reviews-link:hover{
+    color: white;
+    text-decoration: none;
+}
+
+#reviews-text{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
 #user-icon{
     font-size: 22px;
     color: white;
@@ -44,4 +59,5 @@
     #user-name{
         display: none;
     }
+
 }

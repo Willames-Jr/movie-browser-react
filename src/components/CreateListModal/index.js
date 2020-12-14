@@ -4,9 +4,9 @@ import { Alert, Button, Card, CardBody, CardFooter, CardHeader, FormGroup, Input
 import usersApi from "../../services/usersApi";
 import './styles.css';
 
-export default class Modal extends Component {
-    constructor(props) {
-        super(props);
+export default class CreateListModal extends Component {
+    constructor() {
+        super();
         this.state = {
             hidden: true,
             allLists: [],
@@ -19,6 +19,10 @@ export default class Modal extends Component {
         };
     }
 
+    componentDidMount(){
+        this.loadLists();
+    }
+
     componentWillUpdate(nextProps) {
         if (typeof nextProps.movieId !== 'undefined' && nextProps.movieId !== this.props.movieId && typeof localStorage.getItem('user') === undefined) {
             this.loadLists();
@@ -28,9 +32,10 @@ export default class Modal extends Component {
     loadLists = () => {
         usersApi.get(`lists/${JSON.parse(localStorage.getItem('user')).id}`)
             .then((response) => {
+                console.log(response.data)
                 let checkedLists = {};
                 response.data.results.forEach(list => {
-                    if (list.movies.includes(this.props.movieId.toString())) {
+                    if (list.movies.includes(this.props.movieId?.toString())) {
                         checkedLists[list.name] = true;
                     } else {
                         checkedLists[list.name] = false;

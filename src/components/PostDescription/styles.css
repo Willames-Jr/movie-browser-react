@@ -1,0 +1,7 @@
+#content-card{
+    overflow: hidden;
+    display: -webkit-box;
+    font-size: 17px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

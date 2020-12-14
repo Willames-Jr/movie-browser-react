@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import usersApi from '../../services/usersApi';
-import { Button, Container, Card, CardHeader, CardBody } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 
 import './styles.css';
+import InfoCard from '../../components/InfoCard';
 
 export default class DashBoard extends Component {
 
@@ -12,12 +13,28 @@ export default class DashBoard extends Component {
         super();
         this.state = {
             user: {},
-            allLists: []
+            allLists: [],
+            showAllLists: false,
+            allReviews: [],
+            showAllReviews: false
         }
     }
 
     componentDidMount() {
         this.loadLists();
+        this.loadUserReviews();
+    }
+
+    loadUserReviews = () => {
+        usersApi.get(`user-reviews/${JSON.parse(localStorage.getItem('user')).id}`)
+            .then((response) => {
+                console.log(response);
+                this.setState({
+                    allReviews: response.data
+                })
+            }).catch((err) => {
+                console.log(err);
+            })
     }
 
     loadLists = () => {
@@ -34,15 +51,58 @@ export default class DashBoard extends Component {
     }
 
     showLists = () => {
-        return this.state.allLists.map(list => {
+        const lists = this.state.allLists?.map(list => {
             return (
-                <li >
-                    <Link to = {`/list/${this.state.user.id}/${list._id}`} className = "list-link">
+                <li>
+                    <Link key={list._id} to={`/list/${this.state.user.id}/${list._id}`} className="list-link">
                         {list.name}
                     </Link>
                 </li>
-            )
-        })
+            );
+        });
+        const returnList = !this.state.showAllLists
+            ? lists.slice(0, 10)
+            : lists;
+
+        return returnList;
+    }
+
+    showListsButton = () => {
+        
+        if(this.state.allLists.length < 10){
+            return
+        }
+
+        const buttonMessage = this.state.showAllLists ? "Show less" : "Show more";
+
+        return (<Button onClick={e => { this.setState({ showAllLists: !this.state.showAllLists }) }} color="primary">{buttonMessage}</Button>)
+    }
+
+    showReviews = () => {
+        const reviews = this.state.allReviews?.map(review => {
+            return (
+                <li >
+                    <Link key={review._id} to={`/update_review/${review._id}`} className="list-link">
+                        {review.title}
+                    </Link>
+                </li>
+            );
+        });
+        const returnReviews = !this.state.showAllReviews
+            ? reviews.slice(0, 10)
+            : reviews;
+
+        return returnReviews;
+    }
+
+    showReviewsButton = () => {
+        if(this.state.allReviews.length < 10){
+            return
+        }
+
+        const buttonMessage = this.state.showAllReviews ? "Show less" : "Show more";
+
+        return (<Button onClick={e => { this.setState({ showAllReviews: !this.state.showAllReviews }) }} color="primary">{buttonMessage}</Button>)
     }
 
     render() {
@@ -58,17 +118,28 @@ export default class DashBoard extends Component {
                         </div>
                         <Link to="/logout" ><Button color="danger">Logout</Button></Link>
                     </Container>
-                    <Card inverse className="mt-3 container-border">
-                        <CardHeader style={{ borderColor: "white" }}><h3>Your movie lists:</h3></CardHeader>
-                        <CardBody>
-                            <ul>
-                                {this.state.allLists.length === 0 ? 
-                                    <h2>No lists found, try to create one</h2>
-                                    : this.showLists()
-                                }
-                            </ul>
-                        </CardBody>
-                    </Card>
+                    <InfoCard title="Your movie lists:">
+                        <ul>
+                            {this.state.allLists?.length === 0 || this.state.allLists === undefined ?
+                                <h2>No lists found, try to create one</h2>
+                                : this.showLists()
+                            }
+                        </ul>
+                        {
+                            this.showListsButton()
+                        }
+                    </InfoCard>
+                    <InfoCard title="Your reviews:">
+                        <ul>
+                            {this.state.allReviews?.length === 0 || this.state.allReviews === undefined ?
+                                <h2>No reviews found, try to create one</h2>
+                                : this.showReviews()
+                            }
+                        </ul>
+                        {
+                            this.showReviewsButton()
+                        }
+                    </InfoCard>
                 </Container>
             </div>
         )

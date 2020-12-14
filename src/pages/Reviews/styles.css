@@ -1,0 +1,22 @@
+.pagination {
+    justify-content: center;
+    color: gray-300;
+    font-size: 1.2em;
+    margin: 30px 0 0 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .pagination li{
+    padding: 15px;
+  }
+
+  .pagination li a{
+    color: gray-300;
+    padding: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .pagination .active {
+    background-color: #0069d9;
+  }
