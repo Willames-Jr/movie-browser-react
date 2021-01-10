@@ -9,6 +9,13 @@ body{
     padding-bottom: 30px;
 }
 
+.container-border {
+    background-color: #202324;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: solid;
+}
 
 .rate-card{
     display: flex; 
@@ -26,10 +33,34 @@ body{
     height: 40px;
     width: 40px;
     border-radius: 30px;
+    margin: 0 !important;
 }
 
 .flex-center{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.content-container{
+    background-color: #2b3030;
+    padding: 10px;
+    padding-bottom: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.no-decoration-button{
+    border: none;
+    background-color: transparent;
+}
+
+.no-decoration-button:focus{
+    outline: none;
+}
+
+.identifier-align{
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }

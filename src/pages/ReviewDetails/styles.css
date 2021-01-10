@@ -1,5 +1,26 @@
+.align-comment-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.align-comment-header div{
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.comment-content{
+    font-size: 20px;
+}
+
 #review-content{
     white-space: pre-wrap;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif ;
+}
+
+#send-comment{
+    display: flex;
+    align-items: center;
+    justify-content: space-between ;
 }

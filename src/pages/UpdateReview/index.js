@@ -41,7 +41,7 @@ export default class WriteReview extends Component{
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(() => {
-            this.props.history.push('/dashboard');
+            //this.props.history.push('/dashboard');
         }).catch((err) => {
             console.log(err);
         })

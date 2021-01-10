@@ -73,7 +73,7 @@ export default class Reviews extends Component {
                 <Container className="principal-container">
                     <h2>Last posts</h2>
                     <hr style={{ backgroundColor: "white" }} />
-                    {
+                    {this.state.reviews &&
                         this.showAllReviews()
                     }
                     <div className="mt-4" ref={this.divInfiniteScrollRef}><p></p></div>
