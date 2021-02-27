@@ -8,7 +8,7 @@ A React movie browser app
 
 ## About The Project
 
-Movie browser is a simple app made by me in order to practice practicing some basic concepts of react de react. This is not a "final" version, as I intend to constantly be implementing new features in the app.
+Movie browser is a simple app made by me in order to practice some basic concepts of react. This is not a "final" version, as I intend to constantly be implementing new features in the app.
 
 
 ![movie-detail](movieApp_1.png)
