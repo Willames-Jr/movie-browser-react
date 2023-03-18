@@ -1,6 +1,6 @@
 # Movie Browser
 
-https://movie-app-rweb.herokuapp.com/
+https://movie-browser.herokuapp.com/
 
 A React movie browser app
 
