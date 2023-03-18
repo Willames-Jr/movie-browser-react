@@ -1,8 +1,10 @@
-# Movie Browser
+# Movie Browser - A React movie browser app
 
 https://movie-browser.herokuapp.com/
 
-A React movie browser app
+### Server side code
+
+https://github.com/Willames-Jr/movie-app-server
 
 ![overview](movieApp_2.png)
 
